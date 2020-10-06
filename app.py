@@ -1,12 +1,16 @@
 from flask import Flask, render_template, request
 import stripe
+import yaml
 
-secret_key = 'sk_test_51HS281D3aUJGj8sriZtRGrsSNFtEm2J2ZULrUTROYPyjrDI45JSIJgb5U3cOAD6U4RCvEwL23RzOWqnSzSSl0dvg00DHuncnZq'
-publishable_key = 'pk_test_51HS281D3aUJGj8srNPXC2f4qOYyTUIEewqenGhZQ7xIJfOCK9o9MIqI9rEnO58Sm0yTBIR9RKbzSy9o9B1Q3cdKU00n5uHJD9T'
+conf = yaml.load(open('conf/application.yml'))
+
+secret_key = conf['app']['secret_key']
+publishable_key = conf['app']['publishable_key']
 
 stripe.api_key = secret_key
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = conf['app']['api_secret_key']
 
 @app.route('/')
 def index():
@@ -25,7 +29,7 @@ def charge():
 		customer=customer.id,
 		amount=amount,
 		currency='brl',
-		description='Recarga PGAC'
+		description='Recarga de créditos PGAC'
 	)
 
 	return render_template('charge.html', amount=amount)

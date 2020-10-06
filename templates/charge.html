@@ -1,4 +1,4 @@
 {% extends "layout.html" %}
 {% block content %}
-  <h2>Thanks, you payed <strong>$5.00</strong>!</h2>
+  <h2>Obrigado! Serão adicionados {{ "R$%.2f"|format((amount|int)/100) }} de créditos a sua carteira!</h2>
 {% endblock %}

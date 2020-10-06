@@ -1,0 +1,11 @@
+app:
+    secret_key: sk_test_51HS281D3aUJGj8sriZtRGrsSNFtEm2J2ZULrUTROYPyjrDI45JSIJgb5U3cOAD6U4RCvEwL23RzOWqnSzSSl0dvg00DHuncnZq
+    publishable_key: pk_test_51HS281D3aUJGj8srNPXC2f4qOYyTUIEewqenGhZQ7xIJfOCK9o9MIqI9rEnO58Sm0yTBIR9RKbzSy9o9B1Q3cdKU00n5uHJD9T
+    api_secret_key: fXsy-U4i1xlqEHDZaJlYiw
+
+db_rds:
+    database: pgac_rds
+    user: pgac
+    password: Mochileiros2020
+    host: pgac.cnolijchjnvc.sa-east-1.rds.amazonaws.com
+    port: 5432
