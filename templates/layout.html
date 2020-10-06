@@ -2,19 +2,61 @@
 <html>
 <head>
   <title>Stripe</title>
-
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,500&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> 
   <style type="text/css" media="screen">
-    form article label {
-      display: block;
-      margin: 5px;
+    body{
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      background-color: #2e1aee;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      flex-direction: column;
     }
-
+    form {
+      margin: 0;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center
+    }
+    article{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    article label {
+      margin-bottom: 32px;
+      font-size: 32px;
+    }
+    input {
+      padding: 32px 64px;
+      border-radius: 8px;
+      border: none;
+      font-size: 30px;
+      font-weight: 600;
+      margin-bottom: 32px;
+    }
     form .submit {
       margin: 15px 0;
+    }
+    .stripe-button-el span {
+      width: 400px;
+      font-size: 30px !important;
+      padding: 20px !important;
+      background: #fee801 !important;
+      color: #000000 !important;
     }
   </style>
 </head>
 <body>
-  {% block content %}{% endblock %}
+  <img style="margin-bottom: 100px;" src="https://brunofortunato.com.br/image/logo-app.png" width="200px" height="200px" alt="Logo Pagbus">
+  <div style="width: 90%;">
+    {% block content %}{% endblock %}
+  </div>
+ 
 </body>
 </html>

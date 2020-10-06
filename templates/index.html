@@ -1,11 +1,36 @@
 {% extends "layout.html" %}
 {% block content %}
-  <form action="/charge" method="post">
+<style>
+  .span_currency{
+    color: black;
+    position: absolute;
+    font-size: 28px;
+    font-weight: bold;
+    top: 32px;
+    left: 18px;
+  }
+</style>
+  <form action="/charge" method="post" style="margin: 0;">
     <article>
       <label>Insira a quantidade de créditos para comprar:</label>
-      <input name="creditos">
+      <div style="position: relative; ">
+        <span class="span_currency">R$</span>
+        <input maxlength="10" minlength="3" type="text" name="creditos" id="valor" onkeyup="formatCurrency(this)" >
+      </div>
+     
     </article>
     <br>
-    <script src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button" data-key="{{ key }}"></script>
+    <script src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"  data-key="{{ key }}"></script>
   </form>
+
+  <script>
+    function formatCurrency(i) {
+      var v = i.value.replace(/\D/g,'');
+      v = (v/100).toFixed(2) + '';
+      v = v.replace(".", ",");
+      v = v.replace(/(\d)(\d{3})(\d{3}),/g, "$1.$2.$3,");
+      v = v.replace(/(\d)(\d{3}),/g, "$1.$2,");
+      i.value = v;
+  }
+    </script>
 {% endblock %}
