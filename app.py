@@ -19,7 +19,8 @@ def index():
 @app.route('/charge', methods=['POST'])
 def charge():
 	amount = request.form['creditos']
-
+	amount = amount.replace(",", "")
+	
 	customer = stripe.Customer.create(
 		email=request.form['stripeEmail'],
 		card=request.form['stripeToken']
@@ -27,7 +28,7 @@ def charge():
 
 	charge = stripe.Charge.create(
 		customer=customer.id,
-		amount=amount,
+		amount=int(amount),
 		currency='brl',
 		description='Recarga de créditos PGAC'
 	)
