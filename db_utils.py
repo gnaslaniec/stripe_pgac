@@ -16,9 +16,13 @@ class OperacoesBD(object):
 
     def atualiza_saldo(connection,cursor,valor,id_usuario):
         # Captura o saldo atual do usuário
-        cursor.execute("""select saldo from usuario where id = %s""", (id_usuario,))
+        cursor.execute("""select saldo_centavos from usuario where id = %s""", (id_usuario,))
         saldo = cursor.fetchone()
         # Soma o saldo atual do usuário com o valor que foi comprado
-        saldo_atualizado = saldo[0] + int(valor)
-        cursor.execute("""update usuario set saldo = %s where id = %s""", (saldo_atualizado,id_usuario))
+        saldo_centavos = saldo[0] + int(valor)
+        # Formata e salva o valor em reais
+        saldo_real = float(saldo_centavos) / 100
+        # Atualiza o saldo no banco
+        cursor.execute("""update usuario set saldo_centavos = %s where id = %s""", (saldo_centavos,id_usuario))
+        cursor.execute("""update usuario set saldo = %s where id = %s""", (saldo_real,id_usuario))
         connection.commit()
