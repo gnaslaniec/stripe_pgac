@@ -19,6 +19,6 @@ class OperacoesBD(object):
         cursor.execute("""select saldo from usuario where id = %s""", (id_usuario,))
         saldo = cursor.fetchone()
         # Soma o saldo atual do usuário com o valor que foi comprado
-        saldo_atualizado = saldo[0] + valor
+        saldo_atualizado = saldo[0] + int(valor)
         cursor.execute("""update usuario set saldo = %s where id = %s""", (saldo_atualizado,id_usuario))
         connection.commit()

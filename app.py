@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from db_utils import OperacoesBD
 import stripe
 import yaml
 
@@ -12,6 +13,8 @@ stripe.api_key = secret_key
 app = Flask(__name__)
 app.config['SECRET_KEY'] = conf['app']['api_secret_key']
 
+connection, cursor = OperacoesBD.conexao_bd_rds(conf)
+
 @app.route('/')
 def index():
 	return render_template('index.html', key=publishable_key)
@@ -20,6 +23,7 @@ def index():
 def charge():
 	amount = request.form['creditos']
 	amount = amount.replace(",", "")
+	user_id = request.form['id']
 	
 	customer = stripe.Customer.create(
 		email=request.form['stripeEmail'],
@@ -32,6 +36,9 @@ def charge():
 		currency='brl',
 		description='Recarga de créditos PGAC'
 	)
+
+	if user_id != '':
+		OperacoesBD.atualiza_saldo(connection,cursor,amount,user_id)
 
 	return render_template('charge.html', amount=amount)
 
