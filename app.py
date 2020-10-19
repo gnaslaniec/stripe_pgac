@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from db_utils import OperacoesBD
 import stripe
 import yaml
@@ -48,8 +48,9 @@ def saldo_usuario():
     if req_data != None:
         id_usuario = req_data['id_usuario']
         saldo = OperacoesBD.retorna_saldo_usuario_reais(cursor,id_usuario)
-        return str(saldo)
-    return 'Id Inválido!'
+        return jsonify(saldo=str(saldo))
+    else:
+        return 'Id Inválido!'
 
 if __name__ == '__main__':
 	app.run(threaded=True)
