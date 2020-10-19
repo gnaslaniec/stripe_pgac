@@ -49,8 +49,6 @@ def saldo_usuario():
         id_usuario = req_data['id_usuario']
         saldo = OperacoesBD.retorna_saldo_usuario_reais(cursor,id_usuario)
         return jsonify(saldo=str(saldo))
-    else:
-        return 'Id Inválido!'
 
 if __name__ == '__main__':
 	app.run(threaded=True)
