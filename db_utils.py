@@ -26,3 +26,8 @@ class OperacoesBD(object):
         cursor.execute("""update usuario set saldo_centavos = %s where id = %s""", (saldo_centavos,id_usuario))
         cursor.execute("""update usuario set saldo = %s where id = %s""", (saldo_real,id_usuario))
         connection.commit()
+
+    def retorna_saldo_usuario_reais(cursor, id_usuario):
+        cursor.execute("""select round(saldo,2) from usuario where id = %s""", (id_usuario,))
+        saldo = cursor.fetchone()
+        return saldo[0]
