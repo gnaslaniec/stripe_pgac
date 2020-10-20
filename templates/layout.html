@@ -7,6 +7,7 @@
   <style type="text/css" media="screen">
     body{
       height: 100vh;
+      width: 100vw;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -27,6 +28,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      width: 100%;
     }
     article label {
       margin-bottom: 32px;
@@ -39,24 +41,34 @@
       font-size: 30px;
       font-weight: 600;
       margin-bottom: 32px;
+      width: 100%;
+    }
+    form {
+      margin: 40px;
     }
     form .submit {
       margin: 15px 0;
     }
     .stripe-button-el span {
       width: 400px;
-      font-size: 30px !important;
-      padding: 20px !important;
+      font-size: 35px !important;
+      padding: 40px !important;
       background: #fee801 !important;
       color: #000000 !important;
+    }
+    .desktop{
+      background-color: #2e1aee;
     }
   </style>
 </head>
 <body>
-  <img style="margin-bottom: 100px;" src="https://brunofortunato.com.br/image/logo-app.png" width="200px" height="200px" alt="Logo Pagbus">
-  <div style="width: 90%;">
+  <img style="margin-bottom: 100px;" src="https://brunofortunato.com.br/image/logo-app.png" width="400px" height="400px" alt="Logo Pagbus">
+  <div style="display: flex; width: 100%;  justify-content: center;">
     {% block content %}{% endblock %}
   </div>
  
 </body>
+<script>
+  document.getElementsByTagName('span')[1].innerText="Realizar Compra";
+</script>
 </html>
