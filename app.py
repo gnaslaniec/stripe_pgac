@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify,url_for
 from db_utils import OperacoesBD
 import stripe
 import yaml
@@ -42,14 +42,13 @@ def charge():
 
 	return render_template('charge.html', amount=amount)
 
-@app.route('/saldo_usuario', methods=['GET'])
-def saldo_usuario():
-    req_data = request.get_json()
-    if req_data != None:
-        id_usuario = req_data['id_usuario']
-        saldo = OperacoesBD.retorna_saldo_usuario_reais(cursor,id_usuario)
-        return str(saldo)
-    return 'Id Inválido!'
+@app.route('/saldo_usuario/<string:id_usuario>', methods=['GET'])
+def getSaldoUsuario(id_usuario):
+	if id_usuario != None:
+		saldo = OperacoesBD.retorna_saldo_usuario_reais(cursor, id_usuario)
+		return jsonify(saldo=str(saldo))
+	else:
+		return 'Id inválido!'
 
 if __name__ == '__main__':
 	app.run(threaded=True)

@@ -30,4 +30,7 @@ class OperacoesBD(object):
     def retorna_saldo_usuario_reais(cursor, id_usuario):
         cursor.execute("""select round(saldo,2) from usuario where id = %s""", (id_usuario,))
         saldo = cursor.fetchone()
-        return saldo[0]
+        if saldo != None:
+            return saldo[0]
+        else:
+            return False
